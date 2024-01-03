@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+from primitives import *
+from sys import argv
+
+_, stack, env = run("\"prelude.co\" include", env = primitives)
+if len(argv) == 1:
+	repl(stack, env)
+elif len(argv) == 2:
+	with open(argv[1]) as file:
+		run(file.read(), stack, env)
+else:
+	print(f"Usage: {argv[0]} [file]")

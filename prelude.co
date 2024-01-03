@@ -1,0 +1,16 @@
+[newline] ['\n' put] define
+[putln] [put newline] define
+[dupd] [[dup] dip] define
+[swapd] [[swap] dip] define
+[popd] [[pop] dip] define
+[rollup] [swap swapd] define
+[rolldown] [swapd swap] define
+[rotate] [rollup swap] define
+[rollupd] [[rollup] dip] define
+[rolldownd] [[rolldown] dip] define
+[rotated] [[rotated] dip] define
+[neg] [-1 *] define
+[swons] [swap cons] define
+[unswons] [uncons swap] define
+[of] [swap at] define
+[enconcat] [swapd cons concat] define

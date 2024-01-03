@@ -7,7 +7,7 @@ def primitive(name, precondition = lambda q, s, e: True):
 		global primitives
 		def precondition_checker(queue, stack, env):
 			if not precondition(queue, stack, env):
-				return [ConkError(f"{name} requires {precondition.requirement}")] + queue, stack, env
+				return [ElationError(f"{name} requires {precondition.requirement}")] + queue, stack, env
 			return function(queue, stack, env)
 		primitives.append([Symbol(name), precondition_checker])
 		return precondition_checker
@@ -21,7 +21,7 @@ def include(queue, stack, env):
 @primitive("define", define_arguments)
 def define(queue, stack, env):
 	if env_has(env, stack[1][0]):
-		return [ConkError(f"Cannot redefine {stack[1][0]}")] + queue, stack, env
+		return [ElationError(f"Cannot redefine {stack[1][0]}")] + queue, stack, env
 	return queue, stack[2 : ], env + [stack[1] + stack[0]]
 
 @primitive("trace", one_list)

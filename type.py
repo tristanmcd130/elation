@@ -9,7 +9,7 @@ class Symbol(str):
 	def __hash__(self):
 		return str(self).__hash__() + 1
 
-class ConkError(Exception):
+class ElationError(Exception):
 	def __init__(self, message = ""):
 		self.message = message
 		super().__init__(type, message)

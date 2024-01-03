@@ -2,7 +2,7 @@ from type import *
 from lark import Lark, Transformer
 
 def parse(string, start = "term"):
-	class ConkTransformer(Transformer):
+	class ElationTransformer(Transformer):
 		def term(self, items):
 			return items
 		def bool(self, items):
@@ -19,7 +19,7 @@ def parse(string, start = "term"):
 			return Symbol(items[0].value)
 		def list(self, items):
 			return items
-	return ConkTransformer().transform(Lark(r"""
+	return ElationTransformer().transform(Lark(r"""
 	term: factor*
 	?factor: bool
 		   | int

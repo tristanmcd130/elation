@@ -13,14 +13,14 @@ def step(queue, stack, env):
 	value = queue[0]
 	if callable(value):
 		return value(queue[1 : ], stack, env)
-	elif type(value) == ConkError:
+	elif type(value) == ElationError:
 		print(f"Error: {value.message}")
 		return [], stack, env
 	elif type(value) == Symbol:
 		if env_has(env, value):
 			return env_get(env, value) + queue[1 : ], stack, env
 		else:
-			return [ConkError(f"{value} undefined in current environment")] + queue[1 : ], stack, env
+			return [ElationError(f"{value} undefined in current environment")] + queue[1 : ], stack, env
 	else:
 		return queue[1 : ], [value] + stack, env
 

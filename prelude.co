@@ -1,16 +1,51 @@
-[newline] ['\n' put] define
-[putln] [put newline] define
+[newstack] [[] unstack] define
 [dupd] [[dup] dip] define
 [swapd] [[swap] dip] define
 [popd] [[pop] dip] define
+[dipd] [swap [dip] dip] define
 [rollup] [swap swapd] define
 [rolldown] [swapd swap] define
 [rotate] [rollup swap] define
 [rollupd] [[rollup] dip] define
 [rolldownd] [[rolldown] dip] define
 [rotated] [[rotated] dip] define
+[over] [dupd swap] define
+[under] [swap over] define
 [neg] [-1 *] define
 [swons] [swap cons] define
 [unswons] [uncons swap] define
 [of] [swap at] define
 [enconcat] [swapd cons concat] define
+[body] [env case] define
+[swoncat] [swap concat] define
+[unit] [[] cons] define
+[null] [size 0 =] define
+[small] [size 1 <=] define
+[<=] [> not] define
+[>=] [< not] define
+[!=] [= not] define
+[has] [swap in] define
+[leaf] [list not] define
+[x] [dup i] define
+[construct] [stack rest [swap infra] cons step] define
+[unary] [nullary popd] define
+[binary] [nullary popd popd] define
+[ternary] [nullary popd popd popd] define
+[quaternary] [nullary popd popd popd popd] define
+[branch] [choice i] define
+[ifte] [[nullary] dipd branch] define
+[cond] [[small] [i i] [uncons [uncons] dip [cond] cons ifte] ifte] define
+[while] [[[not] concat []] dip tailrec] define
+[step] [[pop null] [pop pop] [[uncons] dip dup dipd] tailrec] define
+[fold] [[pop pop null] [pop popd] [[unswons] dipd swapd dup dip] tailrec] define
+[map] [[pop null] [pop] [[uncons] dip dup dipd] [cons] linrec] define
+[times] [[pop 0 <=] [pop pop] [dup dipd [1 -] dip] tailrec] define
+[filter] [[pop null] [pop] [[uncons] dip under [over unit [i] dip [] choice] dipd] [concat] linrec] define
+[split] [dup [[not] concat] dip cleave] define
+[some] [false swap [or] concat fold] define
+[all] [true swap [and] concat fold] define
+[newline] ['\n' put] define
+[putln] [put newline] define
+[argc] [argv size] define
+
+"prelude loaded" putln

@@ -2,10 +2,13 @@ from parse import *
 from lark import LarkError
 
 def env_has(env, symbol):
-	return len([x for x in env if x[0] == symbol]) > 0
+	return symbol in dict(env)
 
 def env_get(env, symbol):
-	return [x for x in env if x[0] == symbol][0][1 : ]
+	return dict(env)[symbol]
+
+def env_set(env, symbol, definition):
+	return env + [[symbol, definition]]
 
 def step(queue, stack, env):
 	if len(queue) == 0:

@@ -20,7 +20,9 @@ def step(queue, stack, env):
 		print(f"Error: {value.message}")
 		return [], stack, env
 	elif type(value) == Symbol:
-		if env_has(env, value):
+		if value[0] == "\\":
+			return queue[1 : ], [Symbol(value[1 : ])] + stack, env
+		elif env_has(env, value):
 			return env_get(env, value) + queue[1 : ], stack, env
 		else:
 			return [ElationError(f"{value} undefined in current environment")] + queue[1 : ], stack, env

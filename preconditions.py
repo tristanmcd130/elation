@@ -26,7 +26,7 @@ one_sequence = Precondition(lambda q, s, e: type(s[0]) in [str, list], "a sequen
 nonempty_sequence = Precondition(lambda q, s, e: type(s[0]) in [str, list] and len(s[0]) > 0, "a nonempty sequence")
 one_argument = Precondition(lambda q, s, e: len(s) >= 1, "1 argument")
 two_arguments = Precondition(lambda q, s, e: len(s) >= 2, "2 arguments")
-define_arguments = Precondition(lambda q, s, e: type(s[1]) == list and len(s[1]) == 1 and type(s[1][0]) == Symbol and type(s[0]) == list, "a quoted symbol followed by a list")
+define_arguments = Precondition(lambda q, s, e: type(s[1]) == Symbol and type(s[0]) == list, "a symbol followed by a list")
 dip_arguments = Precondition(lambda q, s, e: len(s) >= 2 and type(s[0]) == list, "any value followed by a list")
 choice_arguments = Precondition(lambda q, s, e: len(s) >= 3 and type(s[2]) == bool, "a logical followed by 2 values")
 cons_arguments = Precondition(lambda q, s, e: (type(s[1]) == Char and type(s[0]) == str) or (len(s) >= 2 and type(s[0]) == list), "a character followed by a list or any value followed by a list")

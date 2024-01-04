@@ -21,7 +21,7 @@ def include(queue, stack, env):
 
 @primitive("define", define_arguments)
 def define(queue, stack, env):
-	return queue, stack[2 : ], env_set(env, stack[1][0], stack[0])
+	return queue, stack[2 : ], env_set(env, stack[1], stack[0])
 
 @primitive("trace", one_list)
 def trace(queue, stack, env):
